@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import "./App.scss";
 import { initializeApp } from "firebase/app";
 import {
@@ -19,6 +19,7 @@ import {
 	collection,
 } from "firebase/firestore";
 import { RouterSwitch } from "./components/RouterSwitch";
+import userEvent from "@testing-library/user-event";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyB_vmCPMb-eEMt9-333XwoMDPw5VVFi8YA",
@@ -34,10 +35,20 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+export const firebaseContext = createContext();
+onAuthStateChanged(auth, (user) => {
+	if (user) {
+		console.log("user state changed");
+	} else {
+		console.log("not signed in");
+	}
+});
 function App() {
 	return (
 		<div className="App">
-			<RouterSwitch />
+			<firebaseContext.Provider value={{ auth, db }}>
+				<RouterSwitch />
+			</firebaseContext.Provider>
 		</div>
 	);
 }
