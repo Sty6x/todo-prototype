@@ -18,6 +18,7 @@ import {
 	add,
 	collection,
 } from "firebase/firestore";
+import { RouterSwitch } from "./components/RouterSwitch";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyB_vmCPMb-eEMt9-333XwoMDPw5VVFi8YA",
@@ -32,8 +33,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
 function App() {
-	return <div className="App"></div>;
+	return (
+		<div className="App">
+			<RouterSwitch />
+		</div>
+	);
 }
 
 export default App;
