@@ -1,27 +1,23 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { firebaseContext } from "../../../App";
+import { SignOutButton } from "../../Signout";
 
 export const TodoPage = () => {
 	const { auth, db } = useContext(firebaseContext);
-	const [userLoaded, setUserLoaded] = useState(false);
-	const navigate = useNavigate();
-	onAuthStateChanged(auth, (user) => {
-		if (user) {
-			setUserLoaded(true);
-		} else {
-			console.log("not logged in");
-		}
-	});
-
 	useEffect(() => {
-		if (!userLoaded) navigate("/sign-up");
-	}, [userLoaded]);
+		console.log(auth.currentUser);
+	}, [auth.currentUser]);
 	return (
 		<div>
-			{userLoaded && <h1>Welcome Back, {auth.currentUser.email}</h1>}
-			<p>What would you like to do today?</p>
+			{auth.currentUser !== null && (
+				<>
+					<h1>Welcome Back, {auth.currentUser.email}</h1>
+					<p>What would you like to do today?</p>
+					<SignOutButton />
+				</>
+			)}
 		</div>
 	);
 };

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firebaseContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
+import { SignOutButton } from "../../Signout";
 
 export const SignIn = () => {
 	const [userCredentials, setUserCredentials] = useState({
@@ -81,13 +82,7 @@ export const SignIn = () => {
 					Sign In
 				</button>
 			</form>
-			<button
-				onClick={(e) => {
-					signOut(auth);
-				}}
-			>
-				Sign Out
-			</button>
+			<SignOutButton />
 		</div>
 	);
 };

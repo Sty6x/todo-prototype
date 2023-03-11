@@ -20,6 +20,7 @@ import {
 } from "firebase/firestore";
 import { RouterSwitch } from "./components/RouterSwitch";
 import userEvent from "@testing-library/user-event";
+import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyB_vmCPMb-eEMt9-333XwoMDPw5VVFi8YA",
@@ -36,14 +37,19 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 export const firebaseContext = createContext();
-onAuthStateChanged(auth, (user) => {
-	if (user) {
-		console.log("user state changed");
-	} else {
-		console.log("not signed in");
-	}
-});
 function App() {
+	const navigate = useNavigate();
+	useEffect(() => {
+		const authObserver = onAuthStateChanged(auth, (user) => {
+			if (user) {
+				navigate(`/${user.uid}/todo-page`);
+				console.log("User Signed in " + auth.currentUser.email);
+			} else {
+				console.log("not signed in");
+			}
+		});
+		return authObserver;
+	}, []);
 	return (
 		<div className="App">
 			<firebaseContext.Provider value={{ auth, db }}>

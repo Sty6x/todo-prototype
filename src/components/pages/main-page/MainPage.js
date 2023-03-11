@@ -4,7 +4,7 @@ import { ROUTES } from "../../../routes";
 
 export const MainPage = () => {
 	const displaySigninAndSignupLinks = ROUTES.map((route, i) => {
-		if (route.id == "sign") {
+		if (route.id) {
 			return (
 				<li key={i}>
 					<Link key={route.id} to={route.path}>
