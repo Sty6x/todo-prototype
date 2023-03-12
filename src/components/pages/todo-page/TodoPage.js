@@ -6,14 +6,26 @@ import { SignOutButton } from "../../Signout";
 
 export const TodoPage = () => {
   const { auth, db } = useContext(firebaseContext);
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
   useEffect(() => {
-    console.log(auth.currentUser);
+    const checkCurrentUser = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        return setIsLoadingUser(true)
+      }
+      console.log('user is not logged in ')
+
+    })
+
+    return checkCurrentUser
   }, [auth.currentUser]);
   return (
     <div>
-      <h1>Welcome Back, {auth.currentUser.email}</h1>
-      <p>What would you like to do today?</p>
-      <SignOutButton />
+      {isLoadingUser &&
+        <>
+          <h1>Welcome Back, {auth.currentUser.email}</h1>
+          <p>What would you like to do today?</p>
+          <SignOutButton />
+        </>}
     </div>
   );
 };
