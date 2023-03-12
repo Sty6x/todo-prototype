@@ -14,6 +14,7 @@ export const RouterSwitch = () => {
 	useEffect(() => {
 		const redirectIfNotLoggedIn = onAuthStateChanged(auth, (user) => {
 			if (user) {
+				navigate(`/app/today`);
 				setUserLoaded(() => true);
 			} else {
 				navigate("/");

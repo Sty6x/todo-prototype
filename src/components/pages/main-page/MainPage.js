@@ -14,7 +14,6 @@ export const MainPage = () => {
 			);
 		}
 	});
-	console.log(displaySigninAndSignupLinks);
 
 	return (
 		<div className="page">

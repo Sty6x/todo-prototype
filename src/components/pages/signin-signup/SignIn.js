@@ -25,7 +25,7 @@ export const SignIn = () => {
 			console.log("user successfully logged in");
 			console.log(user.uid);
 			setUserCredentials({ email: "", password: "" });
-			navigate(`/${user.uid}/todo-page`);
+			// navigate(`//todo-page`);
 		} catch (err) {
 			console.log(err);
 			setLoginErr(true);

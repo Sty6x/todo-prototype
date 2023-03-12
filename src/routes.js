@@ -16,9 +16,9 @@ export const ROUTES = [
 	{ path: "/sign-in", pageName: "Sign in", element: <SignIn />, id: "sign" },
 	// on success of creating and signing in
 	{
-		path: `/:profileID/todo-page`,
+		path: `/app/today`,
 		// need to check if the profile id matches the authorized users UID
-		pageName: "ToDo List",
+		pageName: "Today",
 		element: <TodoPage />,
 	},
 ];
