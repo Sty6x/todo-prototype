@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firebaseContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
-import { SignOutButton } from "../../Signout";
-import {SignForm} from "../signin-signup/SignForm"
+import { SignOutButton } from "./Signout";
+import { SignForm } from "../signin-signup/SignForm"
 
 export const SignIn = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -60,29 +60,9 @@ export const SignIn = () => {
     <div className="page" id="sign-in-container">
       <h1>Sign In</h1>
       {loginErr && <p>Wrong Email And Password</p>}
-      <SignForm onSubmit={signInUser}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            className="signin-input"
-            type="email"
-            id="email"
-            onChange={handleOnChangeInput}
-          />
-        </div>
-        <div>
-          <label htmlFor="pass">Password:</label>
-          <input
-            className="signin-input"
-            type="password"
-            id="pass"
-            onChange={handleOnChangeInput}
-          />
-        </div>
-        <button style={{ marginTop: "10px" }} type="submit">
-          Sign In
-        </button>
+      <SignForm onSubmit={signInUser} handleChange={handleOnChangeInput}>
       </SignForm>
+
       <SignOutButton />
     </div>
   );
